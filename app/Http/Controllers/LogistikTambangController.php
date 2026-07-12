@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Http\Controllers\Controller;
 use app\Models\LogistikTambang;
+use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 
 class LogistikTambangController extends Controller
@@ -11,12 +11,21 @@ class LogistikTambangController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // public function index()
+    // {
+    //     //
+    //     $data_logistik = LogistikTambang::all();
+
+    //     return view('logistik.index', compact('data_logitik'));
+    // }
+
     public function index()
     {
-        //
-        $data_logitik = LogistikTambang::all();
-
-        return view('logistik.index', compact('data_logitik'));
+        // Mengambil semua data logistik tambang dari database
+        $data_logistik = LogistikTambang::all();
+        
+        // Mengarahkan ke file view 'index' di dalam folder 'logistik'
+        return view('logistik.index', compact('data_logistik'));
     }
 
     /**
@@ -34,6 +43,21 @@ class LogistikTambangController extends Controller
     public function store(Request $request)
     {
         //
+        // 1. Validasi data yang masuk dari form
+        $request->validate([
+            'kode_barang'  => 'required|unique:logistik_tambangs',
+            'nama_barang'  => 'required',
+            'kategori'     => 'required',
+            'harga_beli'   => 'required|numeric',
+            'stok_aktual'  => 'required|numeric',
+            'stok_minimum' => 'required|numeric',
+        ]);
+
+        // 2. Simpan ke database
+        LogistikTambang::create($request->all());
+
+        // 3. Arahkan kembali ke halaman index
+        return redirect()->route('logistik.index');
     }
 
     /**
