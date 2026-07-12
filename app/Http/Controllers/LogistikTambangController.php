@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use app\Models\LogistikTambang;
+use App\Models\LogistikTambang;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
