@@ -73,7 +73,7 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-200">
-                            @forelse($data_logistik as$barang)
+                            @forelse($data_logistik as $barang)
                             <tr class="hover:bg-slate-50/50 transition-colors">
                                 <td class="py-4 px-6 text-sm font-mono text-slate-600">{{ $barang->kode_barang }}</td>
                                 <td class="py-4 px-6 text-sm font-medium text-slate-900">{{ $barang->nama_barang }}</td>
@@ -86,7 +86,7 @@
                                     {{ number_format($barang->stok_aktual, 0, ',', '.') }}
                                 </td>
                                 <td class="py-4 px-6 text-sm text-center">
-                                    @if($barang->stok_aktual <=$barang->stok_minimum)
+                                    @if($barang->stok_aktual <= $barang->stok_minimum)
                                         <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-700">Kritis</span>
                                     @else
                                         <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700">Aman</span>
