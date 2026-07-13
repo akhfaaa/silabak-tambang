@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('kode_barang')->unique();
             $table->string('nama_barang');
-            $table->enum('kategori', ['Kelistrikan', 'Hidrolik', 'Consumble', 'BBM']);
+            $table->string('kategori');
             $table->integer('harga_beli');
             $table->integer('stok_aktual');
             $table->integer('stok_minimum');

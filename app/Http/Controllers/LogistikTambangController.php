@@ -19,12 +19,24 @@ class LogistikTambangController extends Controller
     //     return view('logistik.index', compact('data_logitik'));
     // }
 
-    public function index()
+    public function index(Request $request)
     {
-        // Mengambil semua data logistik tambang dari database
-        $data_logistik = LogistikTambang::all();
+        // Menangkap kata kunci pencarian jika ada
+        $search = $request->input('search');
+
+        // Menjalankan kueri ke database
+        $query = LogistikTambang::query();
+
+        if ($search) {
+            // Memfilter berdasarkan Part Number ATAU Deskripsi Barang
+            $query->where('kode_barang', 'LIKE', "%{$search}%")
+                  ->orWhere('nama_barang', 'LIKE', "%{$search}%");
+        }
+
+        // Mengambil data (bisa ditambahkan paginate() nanti jika data sudah ribuan)
+        $data_logistik = $query->get();
         
-        // Mengarahkan ke file view 'index' di dalam folder 'logistik'
+        // Mengarahkan ke file view dengan membawa data logistik
         return view('logistik.index', compact('data_logistik'));
     }
 
@@ -74,6 +86,8 @@ class LogistikTambangController extends Controller
     public function edit(string $id)
     {
         //
+        $logistik = LogistikTambang::findOrFail($id);
+        return view('logistik.edit', compact('logistik'));
     }
 
     /**
@@ -82,6 +96,22 @@ class LogistikTambangController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        // 1. Validasi data (Pengecualian unique untuk kode_barang milik ID ini sendiri)
+        $request->validate([
+            'kode_barang'  => 'required|unique:logistik_tambangs,kode_barang,'.$id,
+            'nama_barang'  => 'required',
+            'kategori'     => 'required',
+            'harga_beli'   => 'required|numeric',
+            'stok_aktual'  => 'required|numeric',
+            'stok_minimum' => 'required|numeric',
+        ]);
+
+        // 2. Cari data dan perbarui
+        $logistik = LogistikTambang::findOrFail($id);
+        $logistik->update($request->all());
+
+        // 3. Kembali ke halaman utama
+        return redirect()->route('logistik.index');
     }
 
     /**
@@ -90,5 +120,10 @@ class LogistikTambangController extends Controller
     public function destroy(string $id)
     {
         //
+        $logistik = LogistikTambang::findOrFail($id);
+        $logistik->delete();
+
+        return redirect()->route('logistik.index');
     }
 }
+
