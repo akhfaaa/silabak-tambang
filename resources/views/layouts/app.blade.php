@@ -66,6 +66,11 @@
         <div class="px-5 py-6">
             <p class="text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-4 px-2">Modul Operasional</p>
             <nav class="space-y-1.5">
+                <a href="{{ route('dashboard') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition-all {{ request()->routeIs('dashboard') ? 'bg-red-600 text-white shadow-md shadow-red-600/20' : 'text-slate-400 hover:bg-slate-800 hover:text-white group' }}">
+                    <svg class="w-5 h-5 {{ request()->routeIs('dashboard') ? 'opacity-90' : 'opacity-70 group-hover:opacity-100 transition-opacity' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"></path></svg>
+                    Dashboard Utama
+                </a>
+                
                 <a href="{{ route('logistik.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition-all {{ request()->routeIs('logistik.*') ? 'bg-red-600 text-white shadow-md shadow-red-600/20' : 'text-slate-400 hover:bg-slate-800 hover:text-white group' }}">
                     <svg class="w-5 h-5 {{ request()->routeIs('logistik.*') ? 'opacity-90' : 'opacity-70 group-hover:opacity-100 transition-opacity' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
