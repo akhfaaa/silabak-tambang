@@ -58,7 +58,7 @@
                         <span>{{ $fastMovingCount }} Item</span>
                     </div>
                     <div class="w-full bg-slate-100 rounded-full h-2">
-                        <div class="bg-red-600 h-2 rounded-full" style="width: {{ $totalBarang > 0 ? ($fastMovingCount / $totalBarang) * 100 : 0 }}%"></div>
+                        <div class="bg-red-600 h-2 rounded-full" style="width: calc(var(--fast-moving-percent, 0) * 1%); --fast-moving-percent: {{ $totalBarang > 0 ? ($fastMovingCount / $totalBarang) * 100 : 0 }}"></div>
                     </div>
                 </div>
                 <div>
@@ -67,7 +67,7 @@
                         <span>{{ $mediumMovingCount }} Item</span>
                     </div>
                     <div class="w-full bg-slate-100 rounded-full h-2">
-                        <div class="bg-blue-600 h-2 rounded-full" style="width: {{ $totalBarang > 0 ? ($mediumMovingCount / $totalBarang) * 100 : 0 }}%"></div>
+                        <div class="bg-blue-600 h-2 rounded-full" style="width: calc(var(--medium-moving-percent, 0) * 1%); --medium-moving-percent: {{ $totalBarang > 0 ? ($mediumMovingCount / $totalBarang) * 100 : 0 }}"></div>
                     </div>
                 </div>
                 <div>
@@ -76,7 +76,7 @@
                         <span>{{ $slowMovingCount }} Item</span>
                     </div>
                     <div class="w-full bg-slate-100 rounded-full h-2">
-                        <div class="bg-slate-400 h-2 rounded-full" style="width: {{ $totalBarang > 0 ? ($slowMovingCount / $totalBarang) * 100 : 0 }}%"></div>
+                        <div class="bg-slate-400 h-2 rounded-full" style="width: calc(var(--slow-moving-percent, 0) * 1%); --slow-moving-percent: {{ $totalBarang > 0 ? ($slowMovingCount / $totalBarang) * 100 : 0 }}"></div>
                     </div>
                 </div>
             </div>
