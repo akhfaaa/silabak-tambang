@@ -15,4 +15,10 @@ class LogistikTambang extends Model
         'stok_aktual',
         'stok_minimum'
     ];
+
+    // Memberitahu Laravel bahwa satu barang bisa memiliki banyak transaksi
+    public function transaksi()
+    {
+        return $this->hasMany(TransaksiLogistik::class, 'logistik_tambang_id');
+    }
 }
